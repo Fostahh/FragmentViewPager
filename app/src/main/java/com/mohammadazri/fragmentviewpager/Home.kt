@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +36,21 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val layout = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val cats = ArrayList<Cat>()
+        cats.add(Cat(R.drawable.cats2, "Cute Orange Cat"))
+        cats.add(Cat(R.drawable.cats1, "Orange Cat"))
+        cats.add(Cat(R.drawable.cats3, "Gray & White Cat"))
+        cats.add(Cat(R.drawable.cats4, "Gray Cat"))
+
+        val home_recyclerView = layout.findViewById<RecyclerView>(R.id.home_recyclerView)
+        val adapter = Home_Adapter(activity!!.applicationContext, cats)
+
+        home_recyclerView.layoutManager = GridLayoutManager(activity!!.applicationContext, 1)
+        home_recyclerView.adapter = adapter
+
+        return layout
     }
 
     companion object {
